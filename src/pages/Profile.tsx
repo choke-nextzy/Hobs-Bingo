@@ -5,9 +5,17 @@ import prfileArrowIcon from "../assets/icons/profile-arrow-icon.png";
 import profileBackground from "../assets/backgrounds/profile-background.png";
 import QRCode from "qrcode.react";
 
-function Profile({ userProfile }: { userProfile: IUserProfile | null }) {
-  const userProfileJSON = JSON.stringify(userProfile?.userId);
-
+function Profile({
+  userProfile,
+  idToken,
+}: {
+  userProfile: IUserProfile | null;
+  idToken: string | null | undefined;
+}) {
+  const userProfileJSON = JSON.stringify({
+    ...userProfile,
+    ...{ idToken: idToken },
+  });
   return (
     <div className="profile">
       <div className="navbar">

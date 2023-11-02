@@ -7,30 +7,35 @@ import Home from "./pages/Home";
 
 export default function App() {
   const [message, setMessage] = useState("");
-const [error, setError] = useState("");
-const [userProfile, setUserProfile] = useState<IUserProfile | null>(null);
+  const [idToken, setIdToken] = useState<string|null>();
+  const [error, setError] = useState("");
+  const [userProfile, setUserProfile] = useState<IUserProfile | null>(null);
 
-useEffect(() => {
-  liff
-    .init({
-      liffId: import.meta.env.VITE_LIFF_ID,
-    })
-    .then(async () => {
-      const idToken = liff.getIDToken();
-      const profile = await liff.getProfile();
-      setUserProfile(profile);
-    })
-    .catch((e: Error) => {
-      setError(`${e}`);
-    });
-});
+  useEffect(() => {
+    liff
+      .init({
+        liffId: import.meta.env.VITE_LIFF_ID,
+      })
+      .then(async () => {
+        const idToken = liff.getIDToken();
+        setIdToken(idToken)
+        const profile = await liff.getProfile();
+        setUserProfile(profile);
+      })
+      .catch((e: Error) => {
+        setError(`${e}`);
+      });
+  });
 
   return (
     <div>
       <Routes>
         <Route>
           <Route index element={<Home />} />
-          <Route path="profile" element={<Profile userProfile={userProfile} />} />
+          <Route
+            path="profile"
+            element={<Profile userProfile={userProfile} idToken={idToken} />}
+          />
         </Route>
       </Routes>
     </div>
