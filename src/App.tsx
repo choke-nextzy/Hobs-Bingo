@@ -31,11 +31,7 @@ export default function App() {
     <div>
       <Routes>
         <Route>
-          <Route index element={<Home />} />
-          <Route
-            path="profile"
-            element={<Profile userProfile={userProfile} idToken={idToken} />}
-          />
+          <Route index element={<Profile userProfile={userProfile} idToken={idToken} />} />
         </Route>
       </Routes>
     </div>

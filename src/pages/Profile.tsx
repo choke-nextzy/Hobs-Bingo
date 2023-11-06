@@ -1,10 +1,9 @@
-import { Link } from "react-router-dom";
 import IUserProfile from "../interfaces/IUser";
 import "../styles/Profile.scss";
-import prfileArrowIcon from "../assets/icons/profile-arrow-icon.png";
 import profileBackground from "../assets/backgrounds/profile-background.png";
 import QRCode from "qrcode.react";
-
+import binproLogo from "../assets/logos/binpro-logo.png"
+// import { QRCode } from "react-qrcode-logo";
 function Profile({
   userProfile,
   idToken,
@@ -18,13 +17,6 @@ function Profile({
   });
   return (
     <div className="profile">
-      <div className="navbar">
-        <Link to="/" className="back-link">
-          <img src={prfileArrowIcon} alt="Back to /" className="back-arrow" />
-        </Link>
-        <p className="nav-text">บัตรของฉัน</p>
-      </div>
-
       {userProfile ? (
         <div>
           <img
@@ -57,8 +49,24 @@ function Profile({
             <div>
               <p className="info-header">สแกนสะสมแต้มได้ที่นี่</p>
               <p className="info-time">23/12/2024 23:23</p>
+              <p>{typeof(binproLogo)}</p>
               <div className="qr-code">
-                <QRCode value={userProfileJSON} size={240} />
+                <QRCode
+                  value={userProfileJSON}
+                  size={240}
+                  imageSettings={{
+                    src:binproLogo,
+                    height: 65,
+                    width: 65,
+                    excavate: true,
+                  }}
+                />
+                {/* <QRCode
+                      value={userProfileJSON}
+                      logoImage={profileBackground}
+                      size={300}
+                      logoWidth={100}
+                    /> */}
               </div>
             </div>
           </div>
