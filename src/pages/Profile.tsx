@@ -49,7 +49,6 @@ function Profile({
             <div>
               <p className="info-header">สแกนสะสมแต้มได้ที่นี่</p>
               <p className="info-time">23/12/2024 23:23</p>
-              <p>{typeof(binproLogo)}</p>
               <div className="qr-code">
                 <QRCode
                   value={userProfileJSON}
