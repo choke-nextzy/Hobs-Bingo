@@ -17,7 +17,7 @@ export default function App() {
         liffId: import.meta.env.VITE_LIFF_ID,
       })
       .then(async () => {
-        const idToken = liff.getIDToken();
+        const idToken :string|null = liff.getIDToken();
         setIdToken(idToken)
         const profile = await liff.getProfile();
         setUserProfile(profile);
@@ -31,7 +31,7 @@ export default function App() {
     <div>
       <Routes>
         <Route>
-          <Route index element={<Profile userProfile={userProfile} idToken={idToken} />} />
+          <Route index element={<Profile userProfile={userProfile} />} />
         </Route>
       </Routes>
     </div>
