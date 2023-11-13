@@ -2,18 +2,10 @@ import IUserProfile from "../interfaces/IUser";
 import "../styles/Profile.scss";
 import profileBackground from "../assets/backgrounds/profile-background.png";
 import QRCode from "qrcode.react";
-import binproLogo from "../assets/logos/binpro-logo.png"
+import binproLogo from "../assets/logos/binpro-logo.png";
 // import { QRCode } from "react-qrcode-logo";
-function Profile({
-  userProfile,
-  idToken,
-}: {
-  userProfile: IUserProfile | null;
-  idToken: string | null | undefined;
-}) {
-  const userProfileJSON = JSON.stringify({
-    ...userProfile,
-  });
+function Profile({ userProfile }: { userProfile: IUserProfile | null }) {
+  const userId = userProfile?.userId ? userProfile.userId : "";
   return (
     <div className="profile">
       {userProfile ? (
@@ -50,7 +42,7 @@ function Profile({
               <p className="info-time">23/12/2024 23:23</p>
               <div className="qr-code">
                 <QRCode
-                  value={userProfileJSON}
+                  value={userId}
                   size={240}
                   level={"L"}
                   // imageSettings={{
