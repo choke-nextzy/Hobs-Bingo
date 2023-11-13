@@ -52,12 +52,12 @@ function Profile({
                 <QRCode
                   value={userProfileJSON}
                   size={240}
-                  imageSettings={{
-                    src:binproLogo,
-                    height: 65,
-                    width: 65,
-                    excavate: true,
-                  }}
+                  // imageSettings={{
+                  //   src:binproLogo,
+                  //   height: 65,
+                  //   width: 65,
+                  //   excavate: true,
+                  // }}
                 />
                 {/* <QRCode
                       value={userProfileJSON}
