@@ -12,9 +12,7 @@ function Profile({
   idToken: string | null | undefined;
 }) {
   const userProfileJSON = JSON.stringify({
-        userId:userProfile?.userId,
-    displayName:userProfile?.displayName,
-    pictureUrl:userProfile?.pictureUrl
+    ...userProfile,
   });
   return (
     <div className="profile">
