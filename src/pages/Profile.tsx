@@ -52,6 +52,7 @@ function Profile({
                 <QRCode
                   value={userProfileJSON}
                   size={240}
+                  level={"L"}
                   // imageSettings={{
                   //   src:binproLogo,
                   //   height: 65,
