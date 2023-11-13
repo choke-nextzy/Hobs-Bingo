@@ -13,7 +13,6 @@ function Profile({
 }) {
   const userProfileJSON = JSON.stringify({
     ...userProfile,
-    ...{ idToken: idToken },
   });
   return (
     <div className="profile">
