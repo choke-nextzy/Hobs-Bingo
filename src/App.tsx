@@ -27,6 +27,7 @@ export default function App() {
         setUserProfile(profile);
       })
       .catch((e: Error) => {
+        alert(e)
         setError(`${e}`);
       });
   });
