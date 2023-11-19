@@ -27,8 +27,18 @@ export default function App() {
       .catch((e: Error) => {
         setError(`${e}`);
       });
-  });
 
+      fetchProfile(lineToken)
+  },[]);
+
+  const fetchProfile = async (lineToken:string) => {
+      if (lineToken) {
+        await axios.post(`${import.meta.env.VITE_WAFFLE_API}/user/profile`, {
+          lineToken: lineToken,
+        });
+      }
+
+  };
   return (
     <div>
       <Routes>
