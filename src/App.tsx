@@ -19,12 +19,12 @@ export default function App() {
       .then(async () => {
         const lineToken: string | null = await liff.getIDToken();
 
-        await axios.post(
-          `${import.meta.env.VITE_WAFFLE_API}/user/profile`,
-          {
-            lineToken: lineToken,
-          }
-        );
+        // await axios.post(
+        //   `${import.meta.env.VITE_WAFFLE_API}/user/profile`,
+        //   {
+        //     lineToken: lineToken,
+        //   }
+        // );
 
         const profile = await liff.getProfile();
         setUserProfile(profile);
