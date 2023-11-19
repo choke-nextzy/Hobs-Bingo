@@ -18,27 +18,23 @@ export default function App() {
       .then(async () => {
         const lineToken: string | null = liff.getIDToken();
         if (lineToken) {
-          fetchProfile(lineToken);
+          const res = await axios.post(
+            `${import.meta.env.VITE_WAFFLE_API}/user/profile`,
+            {
+              lineToken: lineToken,
+            }
+          );
+          alert(res);
         }
         const profile = await liff.getProfile();
         setUserProfile(profile);
       })
       .catch((e: Error) => {
+        alert(e);
         setError(`${e}`);
       });
   });
 
-  const fetchProfile = async (lineToken: string) => {
-    if (lineToken) {
-      const res = await axios.post(
-        `${import.meta.env.VITE_WAFFLE_API}/user/profile`,
-        {
-          lineToken: lineToken,
-        }
-      );
-      alert(res);
-    }
-  };
   return (
     <div>
       <Routes>
