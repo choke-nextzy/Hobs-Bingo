@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Routes, Route, Outlet, Link, json } from "react-router-dom";
+import { Routes, Route, Outlet, Link } from "react-router-dom";
 import IUserProfile from "./interfaces/IUser";
 import liff from "@line/liff";
 import Profile from "./pages/Profile";
@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import axios from "axios";
 
 export default function App() {
+  const [lineToken, setLineToken] = useState("");
   const [error, setError] = useState("");
   const [userProfile, setUserProfile] = useState<IUserProfile | null>(null);
 
@@ -17,11 +18,15 @@ export default function App() {
       })
       .then(async () => {
         const lineToken: string | null = liff.getIDToken();
+
+        if (lineToken) {
+          setLineToken(lineToken);
+        }
+
         const profile = await liff.getProfile();
         setUserProfile(profile);
       })
       .catch((e: Error) => {
-        alert(e);
         setError(`${e}`);
       });
   });
@@ -30,7 +35,7 @@ export default function App() {
     <div>
       <Routes>
         <Route>
-          <Route index element={<Profile userProfile={userProfile} />} />
+          <Route index element={<Profile userProfile={userProfile} lineToken={lineToken}/>} />
         </Route>
       </Routes>
     </div>
