@@ -33,9 +33,10 @@ export default function App() {
 
   const fetchProfile = async (lineToken:string) => {
       if (lineToken) {
-        await axios.post(`${import.meta.env.VITE_WAFFLE_API}/user/profile`, {
+        const res = await axios.post(`${import.meta.env.VITE_WAFFLE_API}/user/profile`, {
           lineToken: lineToken,
         });
+        alert(res)
       }
 
   };
