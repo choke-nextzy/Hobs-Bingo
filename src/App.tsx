@@ -4,10 +4,10 @@ import IUserProfile from "./interfaces/IUser";
 import liff from "@line/liff";
 import Profile from "./pages/Profile";
 import Home from "./pages/Home";
+import axios from "axios";
 
 export default function App() {
   const [message, setMessage] = useState("");
-  const [idToken, setIdToken] = useState<string|null>();
   const [error, setError] = useState("");
   const [userProfile, setUserProfile] = useState<IUserProfile | null>(null);
 
@@ -17,8 +17,12 @@ export default function App() {
         liffId: import.meta.env.VITE_LIFF_ID,
       })
       .then(async () => {
-        const idToken :string|null = liff.getIDToken();
-        setIdToken(idToken)
+        const lineToken: string | null = liff.getIDToken();
+
+        if (lineToken)
+          await axios.post(`${import.meta.env.VITE_WAFFLE_API}/user/profile`, {
+            lineToken: lineToken,
+          });
         const profile = await liff.getProfile();
         setUserProfile(profile);
       })
