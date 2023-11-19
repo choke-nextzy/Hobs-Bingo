@@ -10,6 +10,7 @@ function Profile({ userProfile }: { userProfile: IUserProfile | null }) {
     <div className="profile">
       {userProfile ? (
         <div>
+          <p>{import.meta.env.VITE_WAFFLE_API}</p>
           <img
             src={profileBackground}
             alt="profile-background"
