@@ -3,9 +3,33 @@ import "../styles/Profile.scss";
 import profileBackground from "../assets/backgrounds/profile-background.png";
 import QRCode from "qrcode.react";
 import binproLogo from "../assets/logos/binpro-logo.png";
-// import { QRCode } from "react-qrcode-logo";
-function Profile({ userProfile,lineToken }: { userProfile: IUserProfile | null ,lineToken:string}) {
+import { useEffect } from "react";
+import axios from "axios";
+
+function Profile({
+  userProfile,
+  lineToken,
+}: {
+  userProfile: IUserProfile | null;
+  lineToken: string;
+}) {
   const userId = userProfile?.userId ? userProfile.userId : "";
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        if (lineToken) {
+          await axios.post(`${import.meta.env.VITE_WAFFLE_API}/user/profile`, {
+            lineToken: lineToken,
+          });
+        }
+      } catch (e) {
+        alert(e);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div className="profile">
