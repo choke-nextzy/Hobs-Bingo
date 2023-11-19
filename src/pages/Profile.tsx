@@ -8,16 +8,19 @@ import axios from "axios";
 function Profile({ userProfile }: { userProfile: IUserProfile | null }) {
   const userId = userProfile?.userId ? userProfile.userId : "";
 
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(null);
   const [error, setError] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("https://api.publicapis.org/entries");
-        setData(response.data.entries);
+        const response = await axios.post("https://cab0-2001-fb1-73-f45-196b-b370-754b-98a8.ngrok-free.app/user/profile", {
+          lineToken: "12322222",
+        });
+
+        setData(response.data); // Adjust this based on the response structure
       } catch (error: any) {
-        setError(`Error fetching data: ${error.message}`);
+        setError(`Error making POST request: ${error.message}`);
       }
     };
 
@@ -88,15 +91,13 @@ function Profile({ userProfile }: { userProfile: IUserProfile | null }) {
     //   )}
     // </div>
     <div>
-      <h1>Public APIs</h1>
+      <h1>Response from API</h1>
       {error && <p>{error}</p>}
-      <ul>
-        {data.map((api, index) => (
-          <li key={index}>
-            <p>{index}</p>
-          </li>
-        ))}
-      </ul>
+      {data && (
+        <pre>
+          <code>{JSON.stringify(data, null, 2)}</code>
+        </pre>
+      )}
     </div>
   );
 }
