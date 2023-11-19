@@ -17,9 +17,6 @@ export default function App() {
       })
       .then(async () => {
         const lineToken: string | null = liff.getIDToken();
-
-        const res = axios.get('https://api.publicapis.org/entries')
-        console.log("res",res)
         const profile = await liff.getProfile();
         setUserProfile(profile);
       })
