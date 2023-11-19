@@ -3,13 +3,7 @@ import "../styles/Profile.scss";
 import profileBackground from "../assets/backgrounds/profile-background.png";
 import QRCode from "qrcode.react";
 
-function Profile({
-  userProfile,
-  lineToken,
-}: {
-  userProfile: IUserProfile | null;
-  lineToken: string;
-}) {
+function Profile({ userProfile }: { userProfile: IUserProfile | null }) {
   const userId = userProfile?.userId ? userProfile.userId : "";
 
   return (

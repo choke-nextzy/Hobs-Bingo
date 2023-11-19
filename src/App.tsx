@@ -7,7 +7,6 @@ import Home from "./pages/Home";
 import axios from "axios";
 
 export default function App() {
-  const [lineToken, setLineToken] = useState("");
   const [error, setError] = useState("");
   const [userProfile, setUserProfile] = useState<IUserProfile | null>(null);
 
@@ -19,7 +18,7 @@ export default function App() {
       .then(async () => {
         const lineToken: string | null = liff.getIDToken();
         if (lineToken) {
-          setLineToken(lineToken);
+          fetchProfile(lineToken);
         }
         const profile = await liff.getProfile();
         setUserProfile(profile);
@@ -27,24 +26,24 @@ export default function App() {
       .catch((e: Error) => {
         setError(`${e}`);
       });
+  });
 
-      fetchProfile(lineToken)
-  },[]);
-
-  const fetchProfile = async (lineToken:string) => {
-      if (lineToken) {
-        const res = await axios.post(`${import.meta.env.VITE_WAFFLE_API}/user/profile`, {
+  const fetchProfile = async (lineToken: string) => {
+    if (lineToken) {
+      const res = await axios.post(
+        `${import.meta.env.VITE_WAFFLE_API}/user/profile`,
+        {
           lineToken: lineToken,
-        });
-        alert(res)
-      }
-
+        }
+      );
+      alert(res);
+    }
   };
   return (
     <div>
       <Routes>
         <Route>
-          <Route index element={<Profile userProfile={userProfile} lineToken={lineToken}/>} />
+          <Route index element={<Profile userProfile={userProfile} />} />
         </Route>
       </Routes>
     </div>
