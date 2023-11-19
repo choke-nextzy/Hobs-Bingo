@@ -26,7 +26,6 @@ function Profile({ userProfile }: { userProfile: IUserProfile | null }) {
                 <p className="info-header">ชื่อสมาชิก</p>
                 <h3>{userProfile.displayName}</h3>
                 <p className="info-header">ยอดใช้จ่าย</p>
-                <p>{import.meta.env.VITE_WAFFLE_API}</p>
                 <h3>5,000</h3>
               </div>
               <div>

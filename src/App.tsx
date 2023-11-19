@@ -1,39 +1,44 @@
 import { useEffect, useState } from "react";
-import { Routes, Route, Outlet, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import IUserProfile from "./interfaces/IUser";
 import liff from "@line/liff";
 import Profile from "./pages/Profile";
-import Home from "./pages/Home";
 import axios from "axios";
 
 export default function App() {
-  const [message, setMessage] = useState("");
+  const [lineToken, setLineToken] = useState("");
   const [error, setError] = useState("");
   const [userProfile, setUserProfile] = useState<IUserProfile | null>(null);
 
   useEffect(() => {
-    liff
-      .init({
-        liffId: import.meta.env.VITE_LIFF_ID,
-      })
-      .then(async () => {
-        const lineToken: string | null = await liff.getIDToken();
+    const fetchData = async () => {
+      try {
+        await liff.init({
+          liffId: import.meta.env.VITE_LIFF_ID,
+        });
 
-        // await axios.post(
-        //   `${import.meta.env.VITE_WAFFLE_API}/user/profile`,
-        //   {
-        //     lineToken: lineToken,
-        //   }
-        // );
+        const token = await liff.getIDToken();
+
+        if (token) {
+          setLineToken(token);
+          // Example of making a POST request
+          const response = await axios.post(`${import.meta.env.VITE_WAFFLE_API}/user/profile`, {
+            lineToken: token,
+          });
+
+          // Handle the response if needed
+          console.log(response.data);
+        }
 
         const profile = await liff.getProfile();
         setUserProfile(profile);
-      })
-      .catch((e: Error) => {
-        alert(e);
+      } catch (e) {
         setError(`${e}`);
-      });
-  });
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div>
