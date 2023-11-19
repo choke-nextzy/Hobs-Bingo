@@ -32,7 +32,6 @@ function Profile({
               <div>
                 <p className="info-header">ชื่อสมาชิก</p>
                 <h3>{userProfile.displayName}</h3>
-                <h3>{userProfile.userId}</h3>
                 <p className="info-header">ยอดใช้จ่าย</p>
                 <h3>5,000</h3>
               </div>
@@ -48,6 +47,7 @@ function Profile({
             <div>
               <p className="info-header">สแกนสะสมแต้มได้ที่นี่</p>
               <p>{lineToken}</p>
+              <p>{userProfile.userId}</p>
               <div className="qr-code">
                 <QRCode
                   value={userId}
