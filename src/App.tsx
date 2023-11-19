@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Routes, Route, Outlet, Link } from "react-router-dom";
+import { Routes, Route, Outlet, Link, json } from "react-router-dom";
 import IUserProfile from "./interfaces/IUser";
 import liff from "@line/liff";
 import Profile from "./pages/Profile";
@@ -17,15 +17,9 @@ export default function App() {
       })
       .then(async () => {
         const lineToken: string | null = liff.getIDToken();
-        if (lineToken) {
-          const res = await axios.post(
-            `${import.meta.env.VITE_WAFFLE_API}/user/profile`,
-            {
-              lineToken: lineToken,
-            }
-          );
-          alert(res);
-        }
+
+        const res = axios.get('https://api.publicapis.org/entries')
+        console.log("res",res)
         const profile = await liff.getProfile();
         setUserProfile(profile);
       })
