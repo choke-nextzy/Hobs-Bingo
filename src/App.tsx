@@ -20,14 +20,17 @@ export default function App() {
         const lineToken: string | null = liff.getIDToken();
 
         if (lineToken)
-          await axios.post(`${import.meta.env.VITE_WAFFLE_API}/user/profile`, {
+          // await axios.post(`${import.meta.env.VITE_WAFFLE_API}/user/profile`, {
+          //   lineToken: lineToken,
+          // });
+          await axios.post(`https://cab0-2001-fb1-73-f45-196b-b370-754b-98a8.ngrok-free.app/user/profile`, {
             lineToken: lineToken,
           });
         const profile = await liff.getProfile();
         setUserProfile(profile);
       })
       .catch((e: Error) => {
-        alert(e)
+        alert(e);
         setError(`${e}`);
       });
   });
