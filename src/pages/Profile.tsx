@@ -52,7 +52,6 @@ function Profile({
                 <h3>{userProfile.displayName}</h3>
                 <p className="info-header">ยอดใช้จ่าย</p>
                 <h3>5,000</h3>
-                <p>{lineToken}</p>
               </div>
               <div>
                 <p className="info-header">เลขสมาชิก/เบอร์โทรติดต่อ</p>
