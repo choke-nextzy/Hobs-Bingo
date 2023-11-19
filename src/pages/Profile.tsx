@@ -4,8 +4,9 @@ import profileBackground from "../assets/backgrounds/profile-background.png";
 import QRCode from "qrcode.react";
 import binproLogo from "../assets/logos/binpro-logo.png";
 // import { QRCode } from "react-qrcode-logo";
-function Profile({ userProfile }: { userProfile: IUserProfile | null }) {
+function Profile({ userProfile,lineToken }: { userProfile: IUserProfile | null ,lineToken:string}) {
   const userId = userProfile?.userId ? userProfile.userId : "";
+
   return (
     <div className="profile">
       {userProfile ? (
@@ -27,6 +28,7 @@ function Profile({ userProfile }: { userProfile: IUserProfile | null }) {
                 <h3>{userProfile.displayName}</h3>
                 <p className="info-header">ยอดใช้จ่าย</p>
                 <h3>5,000</h3>
+                <p>{lineToken}</p>
               </div>
               <div>
                 <p className="info-header">เลขสมาชิก/เบอร์โทรติดต่อ</p>
